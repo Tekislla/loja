@@ -2,23 +2,28 @@
 
 class Conexao
 {
-    const SERVIDOR  = "localhost";
-    const NOMEBANCO = "bd_loja_2info2";
-    const USUARIO   = "root";
-    const SENHA     = "root";
+    const R = "localhost";
+    const N = "bd_loja_2info2";
+    const U = "root";
+    const S = "root";
 
-    public function getConexao()
+    private static $conexao = null;
+
+    public static function getConexao()
     {
-        $conexao = new PDO("mysql:host=" . self::SERVIDOR . ";dbname=" . self::NOMEBANCO , self::USUARIO, self::SENHA);
+        if(self::$conexao == null)
+        {
+            $conexao = new PDO("mysql:host=" . self::R . ";dbname=" . self::N , self::U, self::S);
 
-        //MOSTRAR OS ERROS OCORRIDOS NO BANCO
-        $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //MOSTRAR OS ERROS OCORRIDOS NO BANCO
+            $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        return $conexao;
+            self::$conexao = $conexao;
+        }
+
+        return self::$conexao;
     }
 
 }
 //TESTE CONEXÃO
-
-//$conexao = new Conexao();
-//$conexao->getConexao();
+Conexao::getConexao();

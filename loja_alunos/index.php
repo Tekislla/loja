@@ -1,3 +1,14 @@
+<?php
+
+    require_once "classes/CrudProdutos.php";
+    $crud = new CrudProdutos();
+    $listaProdutos = $crud->getProdutos();
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,23 +62,25 @@
 
 <!-- Page Content -->
 <div class="container">
-    
+
     <!-- Page Features -->
     <div class="row text-center">
 
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-                    <div class="card-body">
-                        <h4 class="card-title">Título</h4>
-                        <p class="card-text">00.00</p>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-ifc">veja +</a>
-                    </div>
+        <?php foreach ($listaProdutos as $prod): ?>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+                <div class="card-body">
+                    <h4 class="card-title"><?= $prod['nome'] ?></h4>
+                    <p class="card-text"><?= $prod['preco'] ?></p>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="produto.php" class="btn btn-ifc">veja +</a>
                 </div>
             </div>
+        </div>
+        <?php endforeach; ?>
 
     </div>
     <!-- /.row -->
